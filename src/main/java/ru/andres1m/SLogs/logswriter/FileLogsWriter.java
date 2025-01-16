@@ -1,16 +1,20 @@
 package ru.andres1m.SLogs.logswriter;
 
+import lombok.Setter;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+@Component
 public class FileLogsWriter implements LogsWriter{
-    private final String name;
     private final LogFileManager fileManager;
 
-    public FileLogsWriter(String name) {
-        this.name = name;
-        this.fileManager = new LogFileManager("andres1m/logspath"); //TODO из конфигурации
+    @Autowired
+    public FileLogsWriter(LogFileManager fileManager) {
+        this.fileManager = fileManager;
     }
 
     @Override
-    public void write(String data) {
-        fileManager.writeLogInFile(name, data);
+    public void write(String serviceName, String data) {
+        fileManager.writeLogInFile(serviceName, data);
     }
 }

@@ -1,15 +1,17 @@
 package ru.andres1m.SLogs.logswriter;
 
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
+@Component
 public class LogFileManager {
-    private final String logsPath;
 
-    public LogFileManager(String logsPath){
-        this.logsPath = logsPath;
-    }
+    @Value("${slogs.file_logs_writer.path}")
+    private String logsPath;
 
     public void createLogFile(String fileName){
         if(isFileExist(getFilePath(fileName))){
