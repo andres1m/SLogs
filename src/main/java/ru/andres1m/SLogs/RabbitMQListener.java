@@ -18,7 +18,7 @@ public class RabbitMQListener {
     }
 
     //TODO документация
-    @RabbitListener(queues = "#{@environment.getProperty('rabbitmq.SLogs_queue.name')}")
+    @RabbitListener(queues = "#{@environment.getProperty('rabbitmq.logs_queue.name')}")
     public void receiveLogMessage(String message) {
         try {
             LoggingRequest request = objectMapper.readValue(message, LoggingRequest.class);
