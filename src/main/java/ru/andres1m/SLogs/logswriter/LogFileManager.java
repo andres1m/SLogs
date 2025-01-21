@@ -27,15 +27,15 @@ public class LogFileManager {
     }
 
     public void writeLogInFile(String fileName, String data){
-        if(!isFileExist(getFilePath(fileName))){
-            throw new IllegalStateException("File not exists");
+        if (!isFileExist(fileName)) {
+            createLogFile(fileName);
         }
 
         File file = new File(getFilePath(fileName));
-        try(FileWriter writer = new FileWriter(file, true)){
-            writer.write(data);
-        }catch (IOException e){
-            throw new RuntimeException(e);
+        try (FileWriter writer = new FileWriter(file, true)) {
+            writer.write(data + "\n");
+        } catch (IOException e) {
+            throw new RuntimeException("Error writing log to file: " + file.getPath(), e);
         }
     }
 

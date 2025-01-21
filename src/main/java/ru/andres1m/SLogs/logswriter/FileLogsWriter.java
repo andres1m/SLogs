@@ -15,6 +15,10 @@ public class FileLogsWriter implements LogsWriter{
 
     @Override
     public void write(String serviceName, String data) {
+        if(!fileManager.isFileExist(serviceName)){
+            fileManager.createLogFile(serviceName);
+        }
+
         fileManager.writeLogInFile(serviceName, data);
     }
 }

@@ -1,10 +1,11 @@
-package ru.andres1m.SLogs;
+package ru.andres1m.SLogs.rabbitmq;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import ru.andres1m.SLogs.LoggingRequest;
 import ru.andres1m.SLogs.logswriter.LogsWriter;
 
 @Component
@@ -21,6 +22,7 @@ public class RabbitMQListener {
     @RabbitListener(queues = "#{@environment.getProperty('rabbitmq.logs_queue.name')}")
     public void receiveLogMessage(String message) {
         try {
+            System.out.println("message listened: " + message);
             LoggingRequest request = objectMapper.readValue(message, LoggingRequest.class);
             logsWriter.write(request.getName(), request.getData());
         } catch (JsonProcessingException e) {
