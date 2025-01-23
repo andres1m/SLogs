@@ -1,6 +1,5 @@
 package ru.andres1m.SLogs.logswriter;
 
-import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

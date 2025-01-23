@@ -22,7 +22,6 @@ public class RabbitMQListener {
     @RabbitListener(queues = "#{@environment.getProperty('rabbitmq.logs_queue.name')}")
     public void receiveLogMessage(String message) {
         try {
-            System.out.println("message listened: " + message);
             LoggingRequest request = objectMapper.readValue(message, LoggingRequest.class);
             logsWriter.write(request.getName(), request.getData());
         } catch (JsonProcessingException e) {

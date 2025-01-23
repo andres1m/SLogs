@@ -32,6 +32,7 @@ public class LogFileManager {
         }
 
         File file = new File(getFilePath(fileName));
+
         try (FileWriter writer = new FileWriter(file, true)) {
             writer.write(data + "\n");
         } catch (IOException e) {
